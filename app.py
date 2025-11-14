@@ -1,4 +1,5 @@
 import json
+
 import streamlit as st
 
 st.set_page_config(page_title="Quiz Demo", layout="wide")
@@ -36,10 +37,7 @@ def grade_exam(questions):
             true_selected = len(correct.intersection(selected_indices))
             false_selected = len(set(selected_indices) - correct)
 
-            # Mỗi câu multiple cho tối đa 1 điểm
-            # + (số đáp án đúng đã chọn) / (tổng đáp án đúng)
-            # - (số đáp án sai đã chọn) / (tổng đáp án đúng)
-            # Không cho điểm âm
+            # mỗi câu multiple tối đa 1 điểm
             if len(correct) > 0:
                 raw = (true_selected - false_selected) / len(correct)
             else:
@@ -51,6 +49,8 @@ def grade_exam(questions):
             {
                 "id": q_id,
                 "question": q["question"],
+                "type": q_type,
+                "options": options,
                 "score": score,
                 "user_indices": user_indices,
                 "correct_indices": list(correct),
@@ -162,7 +162,6 @@ if questions:
     with col_nav:
         st.markdown("#### Câu hỏi")
         n = len(questions)
-        # hiển thị lưới số câu (không nhảy được nhưng tạo cảm giác giống giao diện thi)
         cols = st.columns(5)
         for idx in range(n):
             col = cols[idx % 5]
@@ -210,12 +209,31 @@ if questions:
                 f"({res['total'] / res['max_score'] * 100:.1f}%)"
             )
 
-            with st.expander("Chi tiết từng câu"):
-                for d in res["detail"]:
-                    st.markdown(
-                        f"**Câu {d['id']}** – điểm: **{d['score']:.2f}**"
-                    )
-                    st.markdown(f"- Chỉ số đáp án đúng: `{d['correct_indices']}`")
-                    st.markdown(f"- Chỉ số đáp án bạn chọn: `{d['user_indices']}`")
+            st.markdown("### Chi tiết từng câu (kèm đề và đáp án)")
+            for d in res["detail"]:
+                st.markdown(f"#### Câu {d['id']} – điểm: **{d['score']:.2f}**")
+                st.markdown(d["question"])
+
+                # hiển thị từng đáp án với icon trực quan
+                for idx, opt in enumerate(d["options"]):
+                    is_correct = idx in d["correct_indices"]
+                    is_chosen = idx in d["user_indices"]
+
+                    if is_correct and is_chosen:
+                        prefix = "✅"  # đúng và bạn chọn
+                        note = " **(bạn chọn, đáp án đúng)**"
+                    elif is_correct and not is_chosen:
+                        prefix = "☑️"  # đúng nhưng không chọn
+                        note = " **(đáp án đúng, bạn bỏ sót)**"
+                    elif (not is_correct) and is_chosen:
+                        prefix = "❌"  # sai nhưng bạn chọn
+                        note = " **(bạn chọn sai)**"
+                    else:
+                        prefix = "▫️"  # sai và không chọn
+                        note = ""
+
+                    st.markdown(f"{prefix} {opt}{note}")
+
+                st.markdown("---")
 else:
     st.info("Hãy nhập JSON đề thi và bấm **Tải đề thi / Cập nhật** để bắt đầu làm bài.")
