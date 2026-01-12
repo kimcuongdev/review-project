@@ -86,7 +86,7 @@ example_json = """
     "Đáp án A", "Đáp án B", "Đáp án C", "Đáp án D", "Đáp án E", ... (danh sách các đáp án, không nhất định phải là 5, nên tuỳ câu hỏi mà quyết định nên có bao nhiêu đáp án)
     ],
     "explanations": ["Đúng, vì...", "Sai, vì..."],
-    "correct_answers": [danh sách các đáp án đúng, chỉ một nếu type=="single", nhiều nếu type=="multiple"] 
+    "correct_answers": [danh sách INDEX  BẮT ĐẦU TỪ 0 của các đáp án đúng, chỉ một nếu type=="single", nhiều nếu type=="multiple"] 
   }
 ]
 """.strip()
