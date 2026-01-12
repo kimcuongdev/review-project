@@ -13,6 +13,7 @@ def grade_exam(questions):
     for i, q in enumerate(questions):
         q_type = q.get("type", "single")
         options = q["options"]
+        explanations = q.get("explanations", [])
         correct = set(q["correct_answers"])  # danh sách index đáp án đúng
         q_id = q.get("id", i + 1)
 
@@ -51,6 +52,7 @@ def grade_exam(questions):
                 "question": q["question"],
                 "type": q_type,
                 "options": options,
+                "explanations": explanations,
                 "score": score,
                 "user_indices": user_indices,
                 "correct_indices": list(correct),
@@ -233,6 +235,10 @@ if questions:
                         note = ""
 
                     st.markdown(f"{prefix} {opt}{note}")
+                    # show explanation for this option if provided in question data
+                    explanations = d.get("explanations", [])
+                    if idx < len(explanations) and explanations[idx]:
+                        st.caption(explanations[idx])
 
                 st.markdown("---")
 else:
