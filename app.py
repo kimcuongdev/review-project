@@ -79,40 +79,14 @@ st.markdown("### Bước 1. Nhập JSON đề thi")
 example_json = """
 [
   {
-    "id": 1,
-    "question": "Choose the most appropriate statement about overfitting.",
-    "type": "single",
+    "id": ID của câu hỏi (số nguyên dương lớn hơn 0),
+    "question": "Câu hỏi?",
+    "type": "single" hoặc "multiple",
     "options": [
-      "A function is said to overfit relative to another one if it is less accurate on training data but more accurate on unseen data.",
-      "A function is said to overfit relative to another one if it is less accurate on both training and unseen data.",
-      "A function is said to overfit relative to another one if it is more accurate on training data but less accurate on unseen data.",
-      "All above statements are wrong."
+    "Đáp án A", "Đáp án B", "Đáp án C", "Đáp án D", "Đáp án E", ...
     ],
-    "correct_answers": [2]
-  },
-  {
-    "id": 2,
-    "question": "Which of the following are supervised learning problems?",
-    "type": "multiple",
-    "options": [
-      "Classifying emails as spam or not spam.",
-      "Grouping news articles into topics without any label.",
-      "Predicting house price from area and number of rooms.",
-      "Clustering customers into groups based on behaviour without label."
-    ],
-    "correct_answers": [0, 2]
-  },
-  {
-    "id": 3,
-    "question": "Select all true statements about k-fold cross validation.",
-    "type": "multiple",
-    "options": [
-      "The dataset is split into k disjoint subsets (folds).",
-      "Each fold is used once as validation set.",
-      "The model is trained exactly once.",
-      "It helps estimate how well the model generalizes."
-    ],
-    "correct_answers": [0, 1, 3]
+    "explanations": ["Đúng, vì...", "Sai, vì..."],
+    "correct_answers": [danh sách các đáp án đúng, chỉ một nếu type=="single", nhiều nếu type=="multiple"] 
   }
 ]
 """.strip()
