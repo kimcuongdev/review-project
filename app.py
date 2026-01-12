@@ -83,7 +83,7 @@ example_json = """
     "question": "Câu hỏi?",
     "type": "single" hoặc "multiple",
     "options": [
-    "Đáp án A", "Đáp án B", "Đáp án C", "Đáp án D", "Đáp án E", ...
+    "Đáp án A", "Đáp án B", "Đáp án C", "Đáp án D", "Đáp án E", ... (danh sách các đáp án, không nhất định phải là 5, nên tuỳ câu hỏi mà quyết định nên có bao nhiêu đáp án)
     ],
     "explanations": ["Đúng, vì...", "Sai, vì..."],
     "correct_answers": [danh sách các đáp án đúng, chỉ một nếu type=="single", nhiều nếu type=="multiple"] 
