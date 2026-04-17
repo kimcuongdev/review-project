@@ -1,0 +1,1 @@
+Shuffle lại đáp án sao cho các đáp án đúng được phân bố đều vào A, B, C, D. Chú ý: Chỉ shuffle chứ không thay đổi nội dung của câu hỏi hay đáp án
