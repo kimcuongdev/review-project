@@ -76,7 +76,7 @@ st.title("Exam Questions - Streamlit Demo")
 
 st.markdown("### Bước 1. Nhập JSON đề thi")
 
-example_json = """
+example_json = r"""
 [
   {
     "id": 1,
